@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import RoomFilterBar from "@/components/rooms/RoomFilterBar"; 
 
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function RoomsPage() {
   const [rooms, setRooms] = useState<any[]>([]);
@@ -14,7 +14,12 @@ export default function RoomsPage() {
   const filters = ["All", "Suites", "Deluxe", "Standard"];
 
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/room-types`)
+    // 🔥 ថែមសោរទម្លុះជញ្ជាំង Ngrok នៅទីនេះ (ជើងទី ២ របស់ fetch)
+    fetch(`${BACKEND_URL}/api/room-types`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true"
+      }
+    })
       .then((res) => res.json())
       .then((result) => {
         setRooms(result.data || []);

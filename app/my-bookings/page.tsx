@@ -6,7 +6,7 @@ import Link from "next/link";
 import toast from "react-hot-toast"; // 🔥 ១. Import Toast
 
 // 🔥 ២. ដាក់ Link Ngrok ដើម្បីទាញរូបភាពពី Laravel (ដូចទំព័រ Home ដែរ)
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function MyBookings() {
   const [bookings, setBookings] = useState<any[]>([]);

@@ -2,13 +2,18 @@ import Link from "next/link";
 import BookingButton from "../../../components/BookingButton";
 
 // 🔥 ១. កំណត់ BACKEND_URL ដូចទំព័រមុន ដើម្បីកុំឱ្យដាច់រូប និងងាយស្រួលដូរ Ngrok
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev"; 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL; 
 
 export default async function RoomDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   // 🔥 ២. កែមកប្រើ BACKEND_URL ជំនួស 127.0.0.1
-  const res = await fetch(`${BACKEND_URL}/api/room-types/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${BACKEND_URL}/api/room-types/${id}`, { 
+      cache: 'no-store',
+      headers: {
+        "ngrok-skip-browser-warning": "true"
+      }
+    });
   const result = await res.json();
   const room = result.data;
 

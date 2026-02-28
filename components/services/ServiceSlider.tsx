@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 // 🖼️ រូបភាពបម្រុង (បើ Admin មិនទាន់បាន Upload សេវាកម្មអ្វីសោះ វានឹងលោតរូបនេះ)
 const defaultImages = [

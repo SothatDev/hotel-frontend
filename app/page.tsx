@@ -2,12 +2,17 @@ import Link from "next/link";
 import HeroSlider from "@/components/home/HeroSlider"; // 👈 ទាញយក Component Slide មកប្រើ
 
 // 🔥 ១. បង្កើតអថេរដាក់ Link Ngrok របស់ Laravel នៅទីនេះ (ដើម្បីងាយស្រួលដូរថ្ងៃក្រោយ)
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev"; // 👈 បើបងដូរ Ngrok ថ្មី កុំភ្លេចមកដូរនៅទីនេះផង!
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL; // 👈 បើបងដូរ Ngrok ថ្មី កុំភ្លេចមកដូរនៅទីនេះផង!
 
 // ហៅ API ទាញទិន្នន័យបន្ទប់
 async function getRooms() {
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/room-types", { cache: "no-store" });
+    const res = await // 🔥 ថែមសោរទម្លុះជញ្ជាំង Ngrok នៅទីនេះ (ជើងទី ២ របស់ fetch)
+    fetch(`${BACKEND_URL}/api/room-types`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true"
+      }
+    });
     const result = await res.json();
     return result.data || [];
   } catch (error) {

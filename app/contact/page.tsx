@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast"; // 🔥 កុំភ្លេច Import Toast សម្រាប់លោតសារជោគជ័យ
 
 // 🔥 ដាក់ Link Ngrok របស់ Laravel នៅទីនេះ
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);

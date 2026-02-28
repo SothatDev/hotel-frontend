@@ -2,7 +2,7 @@ import Link from "next/link";
 import ServiceSlider from "@/components/services/ServiceSlider"; // 🔥 Import Slider កាលីបៗមកប្រើ
 
 // 🔥 ១. ដាក់ Link Ngrok របស់ Laravel នៅទីនេះ
-const BACKEND_URL = "https://bifid-susannah-fainthearted.ngrok-free.dev";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 // 🔥 ២. បង្កើតមុខងារហៅ API ទាញយកសេវាកម្មទាំងអស់
 async function getServices() {
