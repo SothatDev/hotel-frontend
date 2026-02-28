@@ -7,6 +7,9 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import toast from "react-hot-toast"; // 🔥 បន្ថែម Toast សម្រាប់លោតសារស្អាតៗ
 
 export default function Login() {
+
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const router = useRouter();
   
   const [email, setEmail] = useState("");
@@ -20,11 +23,13 @@ export default function Login() {
     setLoading(true);
     const toastId = toast.loading("កំពុងភ្ជាប់ជាមួយ Google...");
     try {
-      const res = await fetch("/api/auth/google", {
+      // 🚀 ១. កូដថ្មីសម្រាប់ Google
+      const res = await fetch(`${BACKEND_URL}/api/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          "ngrok-skip-browser-warning": "true" // 🔥 សោរទម្លុះជញ្ជាំង Ngrok
         },
         body: JSON.stringify({ token: credentialResponse.credential }),
       });
@@ -50,9 +55,14 @@ export default function Login() {
     setLoading(true);
     const toastId = toast.loading("កំពុងភ្ជាប់ជាមួយ Telegram...");
     try {
-      const res = await fetch("/api/auth/telegram", {
+      // 🚀 ២. កូដថ្មីសម្រាប់ Telegram
+      const res = await fetch(`${BACKEND_URL}/api/auth/telegram`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        headers: { 
+          "Content-Type": "application/json", 
+          "Accept": "application/json",
+          "ngrok-skip-browser-warning": "true" // 🔥 សោរទម្លុះជញ្ជាំង Ngrok
+        },
         body: JSON.stringify(response), 
       });
       const data = await res.json();
