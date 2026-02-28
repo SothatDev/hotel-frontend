@@ -6,6 +6,10 @@ import Link from "next/link";
 import toast from "react-hot-toast"; // 🔥 បំពាក់អាវុធ Toast ជំនួស Error ក្រហម
 
 export default function Register() {
+
+  // 🔥 ថែមជួរនេះ ដើម្បីទាញយក Link ពី Vercel
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   const router = useRouter();
   
   // States សម្រាប់ទម្រង់ចុះឈ្មោះ
@@ -33,11 +37,12 @@ export default function Register() {
     const toastId = toast.loading("កំពុងបង្កើតគណនីជូនអ្នក...");
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch(`${BACKEND_URL}/api/register`, { // 🔥 ថែម ${BACKEND_URL}
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
+          "ngrok-skip-browser-warning": "true" // 🔥 ថែមសោរទម្លុះជញ្ជាំង
         },
         body: JSON.stringify({ 
           name, 
